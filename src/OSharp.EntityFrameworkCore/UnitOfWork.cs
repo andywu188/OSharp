@@ -174,8 +174,11 @@ namespace OSharp.Entity
                 {
                     await _connection.OpenAsync(cancellationToken);
                 }
-
+#if NETSTANDARD2_0
+                _transaction = _connection.BeginTransaction();
+#else
                 _transaction = await _connection.BeginTransactionAsync(cancellationToken);
+#endif
                 _logger.LogDebug($"在连接 {_connection.ConnectionString} 上开启新事务，事务标识：{_transaction.GetHashCode()}");
             }
 

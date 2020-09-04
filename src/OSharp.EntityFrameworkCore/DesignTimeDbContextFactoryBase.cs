@@ -47,7 +47,7 @@ namespace OSharp.Entity
             ServiceExtensions.MigrationAssemblyName = migrationAssemblyName;
             Console.WriteLine($@"MigrationAssembly: {migrationAssemblyName}");
 
-            ServiceProvider ??= CreateDesignTimeServiceProvider();
+            ServiceProvider = ServiceProvider ?? CreateDesignTimeServiceProvider();
 
             IEntityManager entityManager = ServiceProvider.GetService<IEntityManager>();
             entityManager.Initialize();
